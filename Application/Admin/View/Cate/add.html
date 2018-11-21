@@ -18,7 +18,9 @@
                             <td>
                                 <select name="parentid" id="catid" class="required">
                                     <option value="0">请选择</option>
-                                    <option value="19">精品界面</option><option value="20">推荐界面</option>
+                                    <?php foreach($cate as $v) {?>
+                                    <option value="<?php echo $v['id']?>"><?php echo str_repeat('--',$v['level']).$v['name']?></option>
+                                    <?php }?>
                                 </select>
                             </td>
                         </tr>

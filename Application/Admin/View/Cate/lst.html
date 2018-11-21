@@ -58,10 +58,10 @@ $type['5'] = '哈哈';
                             <td class="tc"><input name="id[]" value="59" type="checkbox"></td>
                             <td>
                                 <input name="ids[]" value="59" type="hidden">
-                                <input class="common-input sort-input" name="ord[]" value="0" type="text">
+                                <input class="common-input sort-input" name="ord[]" value="<?php echo $v['sort']?>" type="text">
                             </td>
                             <td><?php echo $v['id']?></td>
-                            <td title="发哥经典"><a target="_blank" href="#" title="发哥经典"><?php echo $v['name']?></a> …
+                            <td title="发哥经典"><a target="_blank" href="#" title="发哥经典"><?php echo str_repeat('--',$v['level']).$v['name']?></a> …
                             </td>
                             <td><?php echo $type[$v['type']]?></td>
                             <td><img  style="width: 70px" src='__PUBLIC__/Uploads/<?php echo $v["pic"]?>'></td>

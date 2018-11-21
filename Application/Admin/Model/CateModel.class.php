@@ -13,6 +13,11 @@ class CateModel extends Model{
         array('name','require','栏目名称不得为空！',1),  // 都有时间都验证
         array('name','','栏目名称不得重复！',1,'unique',1),
     );
+    public function create_tree(){
+        $data = $this->select();
+        return $this->_create_tree($data);
+
+    }
     /****树形结构*****/
     protected function _create_tree($data,$pid =0,$level=0){
         static $tree = array();

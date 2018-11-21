@@ -5,15 +5,15 @@ use Admin\Common;
 class CateController extends Controller {
     public function lst(){
         $cateModel = D('cate');
-        $data = $cateModel->select();
+        $data = $cateModel->create_tree();
         $this->assign(array(
             'data'=>$data,
             ));
     	$this->display();
     }
     public function add(){
+        $cateModel = D('cate');
         if(IS_POST){
-            $cateModel = D('cate');
             if($cateModel->create()) {
                 $data = I('post.');
                 if ($_FILES['pic']['tmp_name'] != '') {
@@ -38,9 +38,12 @@ class CateController extends Controller {
             }else{
                 $this->error($cateModel->getError());
             }
-
-exit();
+            exit();
         }
+        $cate = $cateModel->create_tree();
+        $this->assign(array(
+            'cate'=>$cate
+        ));
         $this->display();
     }
     public function edit(){
