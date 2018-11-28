@@ -61,10 +61,10 @@ $type['5'] = '哈哈';
                                 <input class="common-input sort-input" name="ord[]" value="<?php echo $v['sort']?>" type="text">
                             </td>
                             <td><?php echo $v['id']?></td>
-                            <td title="发哥经典"><a target="_blank" href="#" title="发哥经典"><?php echo str_repeat('--',$v['level']).$v['name']?></a> …
+                            <td title="发哥经典"><a target="_blank" href="#" title="发哥经典"><?php  echo str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;',$v['level']); if($v['level'] != 0){echo "|--";} echo $v['name']?></a>
                             </td>
                             <td><?php echo $type[$v['type']]?></td>
-                            <td><img  style="width: 70px" src='__PUBLIC__/Uploads/<?php echo $v["pic"]?>'></td>
+                            <td><?php if($v['pic']){ echo '<img style="width: 70px" src="__PUBLIC__/Uploads/'. $v["pic"].'">';}else{echo "";}?></td>
 
                             <td>
                                 <a class="link-update" href="<?php echo U('edit/?id='.$v['id'])?>">修改</a>

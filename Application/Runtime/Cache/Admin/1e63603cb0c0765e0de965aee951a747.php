@@ -78,7 +78,7 @@
                                 <select name="parentid" id="catid" class="required">
                                     <option value="0">请选择</option>
                                     <?php foreach($cate as $v) {?>
-                                    <option value="<?php echo $v['id']?>"><?php echo str_repeat('--',$v['level']).$v['name']?></option>
+                                    <option value="<?php echo $v['id']?>"><?php  echo str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;',$v['level']); if($v['level'] != 0){echo "|--";} echo $v['name']?></option>
                                     <?php }?>
                                 </select>
                             </td>

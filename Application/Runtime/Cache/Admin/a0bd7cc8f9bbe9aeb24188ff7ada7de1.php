@@ -27,7 +27,7 @@
     </div>
 </div>
 <div class="container clearfix">
-    
+
     
     <div class="sidebar-wrap">
         <div class="sidebar-title">
@@ -59,57 +59,78 @@
             </ul>
         </div>
     </div>
-    <!--/sidebar-->
-    <div class="main-wrap">
+<script type="text/javascript" charset="utf-8" src="/Public/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="/Public/ueditor/ueditor.all.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="/Public/ueditor/lang/zh-cn/zh-cn.js"></script>
+<!--/sidebar-->
+<div class="main-wrap">
 
-        <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="/jscss/admin/design/">首页</a><span class="crumb-step">&gt;</span><a class="crumb-name" href="/jscss/admin/design/">栏目管理</a><span class="crumb-step">&gt;</span><span>修改栏目</span></div>
-        </div>
-        <div class="result-wrap">
-            <div class="result-content">
-                <form action="<?php echo U('add')?>" method="post" id="myform" name="myform" enctype="multipart/form-data">
-                    <table class="insert-tab" width="100%">
-                        <tbody><tr>
-                            <th width="120"><i class="require-red">*</i>分类：</th>
-                            <td>
-                                <select name="colId" id="catid" class="required">
-                                    <option value="">请选择</option>
-                                    <option value="19">精品界面</option><option value="20">推荐界面</option>
-                                </select>
-                            </td>
-                        </tr>
-                            <tr>
-                                <th><i class="require-red">*</i>标题：</th>
-                                <td>
-                                    <input class="common-text required" id="title" name="title" size="50" value="" type="text">
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>作者：</th>
-                                <td><input class="common-text" name="author" size="50" value="admin" type="text"></td>
-                            </tr>
-                            <tr>
-                                <th><i class="require-red">*</i>缩略图：</th>
-                                <td><input name="smallimg" id="" type="file"><!--<input type="submit" onclick="submitForm('/jscss/admin/design/upload')" value="上传图片"/>--></td>
-                            </tr>
-                            <tr>
-                                <th>内容：</th>
-                                <td><textarea name="content" class="common-textarea" id="content" cols="30" style="width: 98%;" rows="10"></textarea></td>
-                            </tr>
-                            <tr>
-                                <th></th>
-                                <td>
-                                    <input class="btn btn-primary btn6 mr10" value="提交" type="submit">
-                                    <input class="btn btn6" onclick="history.go(-1)" value="返回" type="button">
-                                </td>
-                            </tr>
-                        </tbody></table>
-                </form>
-            </div>
-        </div>
-
+    <div class="crumb-wrap">
+        <div class="crumb-list"><i class="icon-font"></i><a href="/jscss/admin/design/">首页</a><span class="crumb-step">&gt;</span><a class="crumb-name" href="/jscss/admin/design/">栏目管理</a><span class="crumb-step">&gt;</span><span>新增栏目</span></div>
     </div>
-    <!--/main-->
+    <div class="result-wrap">
+        <div class="result-content">
+            <form action="<?php echo U('edit?id='.$cate['id'])?>" method="post" id="myform" name="myform" enctype="multipart/form-data">
+                <table class="insert-tab" width="100%">
+                    <tbody><tr>
+                        <th width="120"><i class="require-red">*</i>上级分类：</th>
+                        <td>
+                            <select name="parentid" id="catid" class="required">
+                                <option value="0">请选择</option>
+                                <?php foreach($cates as $v) {?>
+                                <option value="<?php echo $v['id']?>" <?php if($v['id'] ==$cate['id']){ echo 'selected="selected"'; }?>><?php  echo str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;',$v['level']); if($v['level'] != 0){echo "|--";} echo $v['name']?> </option>
+                                <?php }?>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><i class="require-red">*</i>栏目名称：</th>
+                        <td>
+                            <input class="common-text required"  name="name" size="50" value="<?php echo $cate['name']?>" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>关键词：</th>
+                        <td><input class="common-text" name="keywords" size="50" value="<?php echo $cate['keywords']?>" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th>描述：</th>
+                        <td><textarea name="des" class="common-textarea"  cols="10" style="width: 48%;" rows="5"><?php echo $cate['des']?></textarea></td>
+                    </tr>
+                    <tr>
+                        <th width="120"><i class="require-red" >*</i>栏目类型：</th>
+                        <td >
+                            <input class="common-text" name="type" size="50" value="1" type="radio" <?php if($cate['type'] == 1){echo 'checked="checked"';}?>>列表
+                            <input class="common-text" name="type" size="50" value="2" type="radio" <?php if($cate['type'] == 2){echo 'checked="checked"';}?>>单页
+                            <input class="common-text" name="type" size="50" value="3" type="radio" <?php if($cate['type'] == 3){echo 'checked="checked"';}?>>留言
+                            <input class="common-text" name="type" size="50" value="4" type="radio" <?php if($cate['type'] == 4){echo 'checked="checked"';}?>>招聘
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><i class="require-red">*</i>缩略图：</th>
+                        <td><input name="pic" id="" type="file"><!--<input type="submit" onclick="submitForm('/jscss/admin/design/upload')" value="上传图片"/>--></td>
+                    </tr>
+                    <tr>
+                        <th>内容：</th>
+                        <td><textarea name="content" class="common-textarea" id="content" cols="30" style="width: 98%;" rows="10"><?php echo $cate['content']?></textarea></td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <td>
+                            <input class="btn btn-primary btn6 mr10" value="提交" type="submit">
+                            <input class="btn btn6" onclick="history.go(-1)" value="返回" type="button">
+                        </td>
+                    </tr>
+                    </tbody></table>
+            </form>
+        </div>
+    </div>
+
+</div>
+<!--/main-->
+<script type="text/javascript">
+    UE.getEditor('content',{initialFrameHeight:200,initialFrameWidth:800});
+</script>
 
 </div>
 </body>
